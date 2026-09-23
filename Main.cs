@@ -46,36 +46,4 @@ namespace SDM.SingingSkill
         }
     }
 
-    public class SDMSingingSkill : Skill
-    {
-        public SDMSingingSkill(SkillNames guid) : base(guid)
-        {
-        }
-        private SDMSingingSkill()
-        {
-        }
-    }
-
-    public class ExampleUsesClass : GameObject
-    {
-        private const SkillNames ExampleCustomSkillGuid = (SkillNames)0x688F2BC6;
-
-        public ExampleUsesClass()
-        {
-        }
-
-        public void ExampleUses(Sim s)
-        {
-            if (!s.SkillManager.HasElement(ExampleCustomSkillGuid))
-            {
-                s.SkillManager.AddElement(ExampleCustomSkillGuid);
-            }
-            s.SkillManager.AddSkillPoints(ExampleCustomSkillGuid, 3.0f);
-            Skill sk = s.SkillManager.GetElement(ExampleCustomSkillGuid);
-            float sl = sk.SkillPoints;
-
-        }
-
-    }
-
 }

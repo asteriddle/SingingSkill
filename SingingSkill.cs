@@ -100,7 +100,6 @@ namespace SDM.SingingSkill
 
         public static List<Guitar.Composition> SingingCompositions = new List<Guitar.Composition>();
 
-        // Token: 0x040079E2 RID: 31202
         public static List<Guitar.Composition> SingingMasterCompositions = new List<Guitar.Composition>();
     }
 
