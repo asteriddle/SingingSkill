@@ -224,7 +224,7 @@ namespace SDM.SingingSkill
             jig.Destroy();
             Simulator.Sleep(0U);
             int num;
-            if (flag3 && sim.RouteToSlotListAndCheckInUse(this, Drums.kRoutingSlots, out num))
+            if (flag3 && sim.RouteToSlotListAndCheckInUse(this, Microphone.kRoutingSlots, out num))
             {
                 this.mIsMirrored = (num == 1);
                 flag3 = true;
@@ -270,6 +270,7 @@ namespace SDM.SingingSkill
         {
             inst.AcquireStateMachine("Drums");
             inst.SetActor("x", inst.InstanceActor);
+            inst.SetParameter("AnimationName", "a2a_soc_neutral_singFriendly_friendly_neutral_x");
             inst.SetActor("drumKit", this);
             inst.EnterState("x", "Enter");
             inst.SetParameter("isMirrored", this.mIsMirrored);
