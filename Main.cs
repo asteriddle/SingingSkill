@@ -4,7 +4,6 @@ using Sims3.Gameplay.Actors;
 using Sims3.Gameplay.Skills;
 using Sims3.Gameplay.Utilities;
 using Sims3.SimIFace;
-[assembly: Tunable] // Do not forget this line!!
 
 //Template Created by Battery
 

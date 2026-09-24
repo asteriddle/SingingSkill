@@ -18,14 +18,16 @@ using Sims3.SimIFace.CustomContent;
 
 namespace SDM.SingingSkill
 {
-    public class Microphone : BandInstrument, IMicrophone, IBandInstrument, IMusicalInstrument, IGameObject, IScriptObject, IScriptLogic, IHasScriptProxy, IObjectUI, IExportableContent
+    public class Microphone : BandInstrument
     {
         
+
+
         public override GameObject.EnvironmentMotive EnvironmentTuning
         {
             get
             {
-                return Drums.kEnvironmentTuning;
+                return Microphone.kEnvironmentTuning;
             }
         }
 
@@ -81,7 +83,8 @@ namespace SDM.SingingSkill
         {
             get
             {
-                return "microphone";
+                // change this to microphone laters
+                return "drums";
             }
         }
 
@@ -136,7 +139,8 @@ namespace SDM.SingingSkill
         {
             get
             {
-                return "subway_playfortips_plist_microphone";
+                // set this to microphone laters
+                return "subway_playfortips_plist_drums";
             }
         }
 
@@ -368,7 +372,7 @@ namespace SDM.SingingSkill
 
         public class Perform : BandInstrument.Perform<Microphone>
         {
-            public override Guitar.Composition GetComposition()
+            public override Sims3.Gameplay.Skills.Guitar.Composition GetComposition()
             {
                 return (base.InteractionDefinition as Microphone.Perform.Definition).Composition;
             }
@@ -394,12 +398,12 @@ namespace SDM.SingingSkill
                 }
 
                 // Token: 0x060045C2 RID: 17858 RVA: 0x0010C7AE File Offset: 0x0010B7AE
-                public Definition(Guitar.Composition comp) : base(comp)
+                public Definition(Sims3.Gameplay.Skills.Guitar.Composition comp) : base(comp)
                 {
                 }
 
                 // Token: 0x060045C3 RID: 17859 RVA: 0x0010C7B7 File Offset: 0x0010B7B7
-                public override BandInstrument.Perform<Microphone>.PerformDefinition<Microphone.Perform> CreateNewDefinition(Guitar.Composition comp)
+                public override BandInstrument.Perform<Microphone>.PerformDefinition<Microphone.Perform> CreateNewDefinition(Sims3.Gameplay.Skills.Guitar.Composition comp)
                 {
                     return new Microphone.Perform.Definition(comp);
                 }
