@@ -121,7 +121,7 @@ namespace SDM.SingingSkill
                 }
             }
 
-            // Token: 0x06004435 RID: 17461 RVA: 0x00105F34 File Offset: 0x00104F34
+            
             public virtual void StartPlaying()
             {
                 this.mStopShouldBeCalled = true;
@@ -130,6 +130,11 @@ namespace SDM.SingingSkill
                 {
                     this.BroadcastPlaying(this.mSkill.SkillLevel);
                     this.mSkill.RegisterForSkillLevelUpEvent(new Skill.SkillLevelUpCallback(this.SkillLevelUpCallback), this);
+                }
+                else
+                {
+                    StyledNotification.Show(new StyledNotification.Format("kill yourself", StyledNotification.NotificationStyle.kGameMessagePositive));
+
                 }
                 this.Target.mWatchBroadcaster = new ReactionBroadcaster(this.Target, this.Target.WatchBroadcasterParams, this.Target.GetWatchInteraction());
                 this.Target.mIsBeingPlayed = true;
@@ -168,6 +173,10 @@ namespace SDM.SingingSkill
                     {
                         this.Target.RemoveInteractionByType(this.Target.GetDanceInteraction());
                     }
+                }
+                else
+                {
+                    StyledNotification.Show(new StyledNotification.Format("kill urself 2", StyledNotification.NotificationStyle.kGameMessagePositive));
                 }
                 this.CleanupBroadcasts();
                 this.mStopShouldBeCalled = false;

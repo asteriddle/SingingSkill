@@ -35,28 +35,45 @@ namespace SDM.SingingSkill
             
             public override void EnterInstrumentStateMachineAndPlay()
             {
-                // bro we are singing
-                if (this.Target.SkillParameterName == "SingingSkill")
+                try
                 {
-                    StyledNotification.Show(new Sims3.UI.StyledNotification.Format("singing yay", StyledNotification.NotificationStyle.kGameMessageNegative));
-                    
+                    // bro we are singing
+                    if (this.Target.SkillParameterName == "SingingSkill")
+                    {
+                        StyledNotification.Show(new Sims3.UI.StyledNotification.Format("singing yay", StyledNotification.NotificationStyle.kGameMessageNegative));
 
+                        try
+                        {
+                            base.EnterStateMachine("solo_generic", "Enter", "x");
+                            base.SetParameter("AnimationName", "a2a_soc_neutral_singFriendly_friendly_neutral_x");
+                            base.AddOneShotScriptEventHandler(100U, new SacsEventHandler(this.SoundControl));
+                            base.AnimateSim("Play Animation");
+                            StyledNotification.Show(new Sims3.UI.StyledNotification.Format("sing animation started ok?", StyledNotification.NotificationStyle.kGameMessageNegative));
+                        }
+                        catch (Exception ex)
+                        {
+                            StyledNotification.Show(new Sims3.UI.StyledNotification.Format("exception caught AFTER object was id'd as microphone while trying to parse state machine", StyledNotification.NotificationStyle.kGameMessageNegative));
+                            return;
+                        }
 
-                    base.EnterStateMachine("solo_generic", "Enter", "x");
-                    base.SetParameter("AnimationName", "a2a_soc_neutral_singFriendly_friendly_neutral_x");
-                    base.AddOneShotScriptEventHandler(100U, new SacsEventHandler(this.SoundControl));
-                    base.AnimateSim("Play Animation");
-                    StyledNotification.Show(new Sims3.UI.StyledNotification.Format("sing animation started ok?", StyledNotification.NotificationStyle.kGameMessageNegative));
+                        
+                    }
+                    // not singing
+                    else
+                    {
+                        StyledNotification.Show(new Sims3.UI.StyledNotification.Format("not singing", StyledNotification.NotificationStyle.kGameMessageNegative));
+                        this.Target.SetupStateMachine(this);
+                        base.SetParameter(this.Target.SkillParameterName, this.mSkill.GetSkillLevelParameterForJazzGraph());
+                        base.AddOneShotScriptEventHandler(100U, new SacsEventHandler(this.SoundControl));
+                        base.AnimateSim("Play");
+                    }
                 }
-                // not singing
-                else
+                catch (Exception ex)
                 {
-                    StyledNotification.Show(new Sims3.UI.StyledNotification.Format("not singing", StyledNotification.NotificationStyle.kGameMessageNegative));
-                    this.Target.SetupStateMachine(this);
-                    base.SetParameter(this.Target.SkillParameterName, this.mSkill.GetSkillLevelParameterForJazzGraph());
-                    base.AddOneShotScriptEventHandler(100U, new SacsEventHandler(this.SoundControl));
-                    base.AnimateSim("Play");
+                    StyledNotification.Show(new Sims3.UI.StyledNotification.Format("exception caught at EnterInstrumentStateMachineAndPlay stage", StyledNotification.NotificationStyle.kGameMessageNegative));
+                    return;
                 }
+                
                     
             }
 

@@ -18,11 +18,11 @@ namespace SDM.SingingSkill
         static bool HasBeenLoaded = false;
 
         [Tunable]
-        public static bool init;
+        public static bool kInstantiator = false;
 
         static Main()
         {
-            init = false;
+            MonoPatcher.PatchAll();
             LoadSaveManager.ObjectGroupsPreLoad += Main.OnPreload;
             World.sOnWorldLoadFinishedEventHandler = (EventHandler)Delegate.Combine(World.sOnWorldLoadFinishedEventHandler, new EventHandler(Main.OnWorldFinishedLoading));
         }
