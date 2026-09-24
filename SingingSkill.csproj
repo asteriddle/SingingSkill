@@ -11,6 +11,9 @@
   </PropertyGroup>
   <PropertyGroup />
   <ItemGroup>
+    <Reference Include="MonoPatcher">
+      <HintPath>..\..\..\monopatcher boilerplate\MonoPatcher\bin\Debug\MonoPatcher.dll</HintPath>
+    </Reference>
     <Reference Include="mscorlib">
       <HintPath>Deps\mscorlib.dll</HintPath>
       <Private>False</Private>

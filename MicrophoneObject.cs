@@ -16,7 +16,7 @@ using Sims3.SimIFace;
 using Sims3.SimIFace.CustomContent;
 
 
-namespace SDM.SingingSkill
+namespace Sims3.Gameplay.Objects.SDM.SingingSkill
 {
     public class Microphone : BandInstrument
     {

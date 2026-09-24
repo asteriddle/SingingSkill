@@ -1,24 +1,35 @@
 ﻿using System;
+using MonoPatcherLib;
 using Sims3.Gameplay.Abstracts;
 using Sims3.Gameplay.Actors;
+using Sims3.Gameplay.Objects.Beds;
 using Sims3.Gameplay.Skills;
 using Sims3.Gameplay.Utilities;
 using Sims3.SimIFace;
+using Sims3.UI;
 
 //Template Created by Battery
 
 namespace SDM.SingingSkill
 {
-    public class ExampleBootstrapperClass : GameObject
+    [Plugin]
+    public class Main
     {
         static bool HasBeenLoaded = false;
 
         [Tunable]
-        protected static bool init = false;
+        public static bool init;
 
-        static ExampleBootstrapperClass()
+        static Main()
         {
-            LoadSaveManager.ObjectGroupsPreLoad += ExampleBootstrapperClass.OnPreload;
+            init = false;
+            LoadSaveManager.ObjectGroupsPreLoad += Main.OnPreload;
+            World.sOnWorldLoadFinishedEventHandler = (EventHandler)Delegate.Combine(World.sOnWorldLoadFinishedEventHandler, new EventHandler(Main.OnWorldFinishedLoading));
+        }
+
+        private static void OnWorldFinishedLoading(object sender, EventArgs e)
+        {
+            StyledNotification.Show(new StyledNotification.Format("singing skill loaded!", StyledNotification.NotificationStyle.kGameMessagePositive));
         }
 
         static void OnPreload()
@@ -36,6 +47,7 @@ namespace SDM.SingingSkill
                     return;
                 }
                 SkillManager.ParseSkillData(data, true);
+
 
             }
             catch (Exception ex)
